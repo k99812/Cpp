@@ -1,39 +1,31 @@
 #include<iostream>
 #include<algorithm>
-#include<vector>
 
 using namespace std;
 
-int n;
-float m;
-vector<pair<int, float>> v(5004);
-
-int go(int c, float p, int idx)
-{
-	//기저사례
-	if (p > m) return -1e9;
-	if (p == m) return 0;
-
-	//메모리제이션
-	int& ret;
-	if (ret) return ret;
-
-	//로직
-	return ret += max(go(c, p), )
-
-}
+int n, dp[10004], c, m1, m2;
 
 int main()
 {
-	while (cin >> n && cin >> m)
+
+	while (true)
 	{
-		if (m == 0.00f) break;
+		scanf_s("%d %d.%d", &n, &m1, &m2);
+		int cost = m1 * 100 + m2;
+		if (cost == 0) break;
 
-		v.clear();
+		fill(&dp[0], &dp[10004], 0);
 
-		for (int i = 0; i < n; i++) cin >> v[i].first >> v[i].second;
-
-		
+		for (int i = 0; i < n; i++)
+		{
+			scanf_s("%d %d.%d", &c, &m1, &m2);
+			int price = m1 * 100 + m2;
+			for (int j = price; j <= cost; j++)
+			{
+				dp[j] = max(dp[j], dp[j - price] + c);
+			}
+		}
+		cout << dp[cost] << "\n";
 	}
 
 	return 0;
