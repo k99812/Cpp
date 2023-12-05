@@ -6,7 +6,7 @@ using namespace std;
 
 const int n = 10, INF = 1e9;
 int a[14][14], ret = INF;
-map<int, int> m;
+map<int, int> nums;
 
 bool check(int y, int x, int size)
 {
@@ -19,7 +19,7 @@ bool check(int y, int x, int size)
 		}
 	}
 	return true;
-}  
+}
 
 void draw(int y, int x, int size, int value)
 {
@@ -35,34 +35,32 @@ void draw(int y, int x, int size, int value)
 void dfs(int y, int x, int cnt)
 {
 	if (cnt >= ret) return;
-
 	if (x == n)
 	{
 		dfs(y + 1, 0, cnt);
 		return;
 	}
-
 	if (y == n)
 	{
 		ret = min(ret, cnt);
 		return;
 	}
-
 	if (a[y][x] == 0)
 	{
 		dfs(y, x + 1, cnt);
+		return;
 	}
 
-	for (int size = 5; size > 0; size--)
+	for (int i = 5; i > 0; i--)
 	{
-		if (m[size] == 5) continue;
-		if (check(y, x, size))
+		if (nums[i] >= 5) continue;
+		if (check(y, x, i))
 		{
-			m[size]++;
-			draw(y, x, size, 0);
-			dfs(y, x + 1, cnt + 1);
-			draw(y, x, size, 1);
-			m[size]--;
+			nums[i]++;
+			draw(y, x, i, 0);
+			dfs(y, x, cnt + 1);
+			draw(y, x, i, 1);
+			nums[i]--;
 		}
 	}
 	return;
