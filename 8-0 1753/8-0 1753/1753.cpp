@@ -26,27 +26,33 @@ int main()
 
 	while (pq.size())
 	{
-		int here = pq.top().second, here_dist = pq.top().first;
+		int here_dist = pq.top().first, here = pq.top().second;
 		pq.pop();
 
 		if (dist[here] != here_dist) continue;
 
-		for (pair<int, int> there : grap[here])
+		for (pair<int, int> p : grap[here])
 		{
-			int n_dist = there.first, n_there = there.second;
+			int there_dist = p.first, there = p.second;
 
-			if (dist[n_there] > dist[here] + n_dist)
+			if (dist[there] > dist[here] + there_dist)
 			{
-				dist[n_there] = dist[here] + n_dist;
-				pq.push({ dist[n_there], n_there });
+				dist[there] = dist[here] + there_dist;
+				pq.push({ dist[here] + there_dist, there });
 			}
 		}
 	}
 
 	for (int i = 1; i <= V; i++)
 	{
-		if (dist[i] == INF) cout << "INF" << "\n";
-		else cout << dist[i] << "\n";
+		if (dist[i] == INF)
+		{
+			cout << "INF" << "\n";
+		}
+		else
+		{
+			cout << dist[i] << "\n";
+		}
 	}
 
 	return 0;
