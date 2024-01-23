@@ -25,9 +25,9 @@ int go(int pos, int x, int y, int z, int flag)
 	int unit = flag ? 1 : -1;
 	for (int i = 1; i <= 3; i++)
 	{
-		ret = min(ret, go(pos + 1, mod_(x + i * unit), y, z, flag) + 1);
-		ret = min(ret, go(pos + 1, mod_(x + i * unit), mod_(y + i * unit), z, flag) + 1);
-		ret = min(ret, go(pos + 1, mod_(x + i * unit), mod_(y + i * unit), mod_(z + i * unit), flag) + 1);
+		ret = min(ret, go(pos, mod_(x + i * unit), y, z, flag) + 1);
+		ret = min(ret, go(pos, mod_(x + i * unit), mod_(y + i * unit), z, flag) + 1);
+		ret = min(ret, go(pos, mod_(x + i * unit), mod_(y + i * unit), mod_(z + i * unit), flag) + 1);
 	}
 	return ret;
 }
