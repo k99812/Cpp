@@ -6,20 +6,21 @@
 using namespace std;
 
 const int INF = 1e9;
-int n, m, s, d, u, v, p, dist[504], grap[504][504];
+int n, m, s, d, u, v, p, grap[504][504], dist[504];
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
 void dijkstra()
 {
 	fill(&dist[0], &dist[504], INF);
-	pq.push({ 0, s });
+
 	dist[s] = 0;
+	pq.push({ 0, s });
 
 	while (pq.size())
 	{
 		int here = pq.top().second, here_dist = pq.top().first;
 		pq.pop();
-		
+
 		if (dist[here] != here_dist) continue;
 
 		for (int i = 0; i < n; i++)
@@ -44,13 +45,13 @@ void eraseEdge()
 
 	while (q.size())
 	{
-		int nx = q.front(); q.pop();
+		int next = q.front(); q.pop();
 
 		for (int i = 0; i < n; i++)
 		{
-			if (dist[nx] == dist[i] + grap[i][nx] && grap[i][nx] != -1)
+			if (dist[next] == dist[i] + grap[i][next] && grap[i][next] != -1)
 			{
-				grap[i][nx] = -1;
+				grap[i][next] = -1;
 				q.push(i);
 			}
 		}
@@ -64,6 +65,7 @@ int main()
 		if (n == 0 && m == 0) break;
 
 		cin >> s >> d;
+
 		fill(&grap[0][0], &grap[503][504], -1);
 
 		for (int i = 0; i < m; i++)
@@ -75,6 +77,7 @@ int main()
 		dijkstra();
 		eraseEdge();
 		dijkstra();
+
 		cout << (dist[d] == INF ? -1 : dist[d]) << "\n";
 	}
 	
