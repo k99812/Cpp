@@ -10,7 +10,7 @@ const int INF = 1e9;
 int n, m, a, b, d, distFox[4004], distWolf[4004][2], ret;
 vector<pair<int, int>> grap[4004];
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-priority_queue < tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq2;
+priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq2;
 
 void dijstraFox()
 {
@@ -41,14 +41,14 @@ void dijstraFox()
 
 void dijstraWolf()
 {
-	fill(&distWolf[0][0], &distWolf[4003][1], INF);
+	fill(&distWolf[0][0], &distWolf[4003][2], INF);
 
 	distWolf[1][0] = 0;
 	pq2.push({ 0, 1, 0 });
 
 	while (pq2.size())
 	{
-		int here_dist, here, cnt;
+		int here, here_dist, cnt;
 		tie(here_dist, here, cnt) = pq2.top(); pq2.pop();
 
 		if (distWolf[here][cnt] != here_dist) continue;
