@@ -19,7 +19,7 @@ struct comp
 			return a.casher_id > b.casher_id;
 		}
 
-		return  a.max_time > b.max_time;
+		return a.max_time > b.max_time;
 	}
 };
 
@@ -33,7 +33,7 @@ bool comp2(const Casher& a, const Casher& b)
 	return a.max_time < b.max_time;
 }
 
-int n, k, id, cost, idx;
+int n, k, id, cost;
 long long ret;
 vector<Casher> v;
 priority_queue<Casher, vector<Casher>, comp> pq;
@@ -41,7 +41,7 @@ priority_queue<Casher, vector<Casher>, comp> pq;
 int main()
 {
 	cin >> n >> k;
-	
+
 	for (int i = 0; i < n; i++)
 	{
 		cin >> id >> cost;
@@ -51,7 +51,8 @@ int main()
 			pq.push({ id, cost, i + 1 });
 			continue;
 		}
-		pq.push({ id, cost + pq.top().max_time, pq.top().casher_id });
+
+		pq.push({ id, pq.top().max_time + cost, pq.top().casher_id });
 		v.push_back(pq.top());
 		pq.pop();
 	}
