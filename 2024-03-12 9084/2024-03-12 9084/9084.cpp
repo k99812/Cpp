@@ -12,22 +12,23 @@ int main()
 
 	while (T--)
 	{
-		int a[24];
 		fill(&dp[0], &dp[10004], 0);
 
 		cin >> n;
-		for (int i = 0; i < n; i++) cin >> a[i];
+		int* coin = new int[n];
+		for (int i = 0; i < n; i++) cin >> coin[i];
 		cin >> m;
 
 		dp[0] = 1;
 		for (int k = 0; k < n; k++)
 		{
-			for (int i = a[k]; i <= m; i++)
+			for (int i = coin[k]; i <= m; i++)
 			{
-				dp[i] += dp[i - a[k]];
+				dp[i] += dp[i - coin[k]];
 			}
 		}
 
+		delete(coin);
 		cout << dp[m] << "\n";
 	}
 
