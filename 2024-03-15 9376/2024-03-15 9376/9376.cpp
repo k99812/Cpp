@@ -13,7 +13,7 @@ const int dy[] = { -1, 0, 1, 0 };
 const int dx[] = { 0, 1, 0, -1 };
 int t, h, w, dist[3][104][104];
 char m[104][104];
-pair<int, int> sinner[2];
+vector<pair<int, int>> sinner;
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
 void dijkstra(int idx, const pair<int, int>& start)
@@ -57,8 +57,8 @@ int main()
     {
         cin >> h >> w;
         memset(dist, INF, sizeof(dist));
+        sinner.clear();
 
-        int order = 0;
         string s;
         for (int i = 1; i <= h; i++)
         {
@@ -69,7 +69,7 @@ int main()
                 m[i][j] = s[j];
                 if (m[i][j] == '$')
                 {
-                    sinner[order++] = { i,j };
+                    sinner.push_back({ i,j });
                 }
             }
         }
