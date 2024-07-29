@@ -1,116 +1,104 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#include<queue>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
 
 #define MAX_NUM 15
-#define cordi 1000
+#define NUM 1000
 
 using namespace std;
 
-int n, m, d, a[MAX_NUM][MAX_NUM], map[MAX_NUM][MAX_NUM], ret, arc[MAX_NUM];
+int a[MAX_NUM][MAX_NUM], map[MAX_NUM][MAX_NUM], n, m, d, answer, archerCol[MAX_NUM];
 
 int dist(const pair<int, int>& a, const pair<int, int>& b)
 {
-	return abs(a.first - b.first) + abs(a.second - b.second);
+    return abs(a.first - b.first) + abs(a.second - b.second);
 }
 
-void printMap()
+bool cmp(const pair<int, int>& a, const pair<int, int>& b)
 {
-	cout << "\n";
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < m; j++)
-		{
-			cout << map[i][j] << " ";
-		}
-		cout << "\n";
-	}
+    if (a.first == b.first) return a.second % NUM < b.second % NUM;
+    else return a.first < b.first;
 }
 
 int attack()
 {
-	int ans = 0;
+    int ret = 0;
 
-	int archerRow = n;
+    int archerRow = n;
+    while (archerRow >= 1)
+    {
+        vector<pair<int, int>> target;
+        for (int k = 0; k < m; k++)
+        {
+            if (!archerCol[k]) continue;
 
-	while (archerRow >= 1)
-	{
-		vector<pair<int, int>> target;
+            vector<pair<int, int>> v;
 
-		for (int k = 0; k < m; k++)
-		{
-			if (!arc[k]) continue;
+            for (int i = 0; i < archerRow; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    if (!map[i][j]) continue;
+                    if (dist({ i, j }, { archerRow, k }) > d) continue;
 
-			priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+                    v.push_back({ dist({i, j}, {archerRow, k}), i * NUM + j });
+                }
+            }
 
-			for (int i = 0; i < archerRow; i++)
-			{
-				for (int j = 0; j < m; j++)
-				{
-					if (!map[i][j]) continue;
-					if (dist({n, k}, {i, j}) > d) continue;
+            if (v.empty()) continue;
 
-					pq.push({ dist({n, k}, {i, j}), i * cordi + j });
-				}
-			}
+            sort(v.begin(), v.end(), cmp);
+            target.push_back({ v[0].second / NUM, v[0].second % NUM });
+        }
 
-			if (pq.size())
-			{
-				target.push_back({ pq.top().second / cordi, pq.top().second % cordi });
-			}
-		}
+        for (const pair<int, int>& p : target)
+        {
+            if (map[p.first][p.second])
+            {
+                map[p.first][p.second] = 0;
+                ret++;
+            }
+        }
 
-		for (const pair<int, int>& t : target)
-		{
-			if (map[t.first][t.second])
-			{
-				map[t.first][t.second] = 0;
-				ans++;
-			}
-		}
+        archerRow--;
+    }
 
-		cout << " row : " << archerRow << "\n";
-		printMap();
-
-		archerRow--;
-	}
-
-	return ans;
+    return ret;
 }
 
-void go(int idx, int num)
+void go(int n, int idx)
 {
-	if (idx == 3) 
-	{
-		copy(&a[0][0], &a[MAX_NUM - 1][MAX_NUM], &map[0][0]);
-		ret = max(ret, attack());
-		return;
-	}
-	for (int i = num; i < m; i++) 
-	{
-		arc[i] = true;
-		go(idx + 1, i + 1);
-		arc[i] = false;
-	}
-	return;
+    if (n == 3)
+    {
+        copy(&a[0][0], &a[MAX_NUM - 1][MAX_NUM], &map[0][0]);
+        answer = max(answer, attack());
+        return;
+    }
+
+    for (int i = idx; i < m; i++)
+    {
+        archerCol[i] = true;
+        go(n + 1, i + 1);
+        archerCol[i] = false;
+    }
 }
 
 int main()
 {
-	cin >> n >> m >> d;
+    cin >> n >> m >> d;
 
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < m; j++)
-		{
-			cin >> a[i][j];
-		}
-	}
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a[i][j];
+        }
+    }
 
-	go(0, 0);
+    go(0, 0);
 
-	cout << ret << "\n";
+    cout << answer << "\n";
 
-	return 0;
+    return 0;
 }
