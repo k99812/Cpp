@@ -61,7 +61,9 @@ void go(int idx)
 		{
 			q.push({ v[i].first, v[i].second });
 			visited[v[i].first][v[i].second] = 0;
+			cout << i << " ";
 		}
+		cout << "\n";
 
 		bfs(q);
 		return;
