@@ -1,81 +1,78 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#include<queue>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
 
 using namespace std;
 
 int n;
+vector<vector<pair<int, int>>> graph;
 
-int dijkstra(int start,vector<int>& dist, const vector<vector<pair<int, int>>>& graph)
+pair<int, int> dijkstra(int start)
 {
-	dist.resize(n + 1, INT32_MAX);
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-	pq.push({ 0, start });
-	dist[start] = 0;
+    vector<int> dist(n + 1, INT32_MAX);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({ 0, start });
+    dist[start] = 0;
 
-	while (pq.size())
-	{
-		int now = pq.top().second, now_dist = pq.top().first;
-		pq.pop();
+    while (pq.size())
+    {
+        int now_dist = pq.top().first, now = pq.top().second;
+        pq.pop();
 
-		if (dist[now] != now_dist) continue;
+        if (dist[now] != now_dist) continue;
 
-		for (pair<int, int> i : graph[now])
-		{
-			int next = i.second, next_dist = i.first;
+        for (pair<int, int>& p : graph[now])
+        {
+            int next = p.first, next_dist = p.second;
 
-			if (dist[next] > dist[now] + next_dist)
-			{
-				dist[next] = dist[now] + next_dist;
-				pq.push({ dist[next], next });
-			}
-		}
-	}
+            if (dist[next] > dist[now] + next_dist)
+            {
+                dist[next] = dist[now] + next_dist;
+                pq.push({ dist[next], next });
+            }
+        }
+    }
 
-	int maxest = 0, num;
-	for (int i = 1; i <= n; i++)
-	{
-		if (dist[i] != INT32_MAX && dist[i] > maxest)
-		{
-			num = i;
-			maxest = dist[i];
-		}
-	}
+    int max_dist = 0, node = start;
+    for (int i = 1; i <= n; i++)
+    {
+        if (dist[i] != INT32_MAX && dist[i] > max_dist)
+        {
+            max_dist = dist[i];
+            node = i;
+        }
+    }
 
-	return num;
+    return { node, max_dist };
 }
 
 int main()
 {
-	cin >> n;
+    cin >> n;
 
-	vector<int> dist(n + 1, INT32_MAX);
-	vector<vector<pair<int, int>>> graph(n + 1);
+    graph.resize(n + 1);
 
-	for (int i = 0; i < n; i++)
-	{
-		int from, to, dist;
+    for (int i = 0; i < n; i++)
+    {
+        int from, to, weight;
+        cin >> from;
 
-		cin >> from;
+        while (cin >> to)
+        {
+            if (to == -1) break;
 
-		while (cin >> to)
-		{
-			if (to == -1) break;
+            cin >> weight;
 
-			cin >> dist;
+            graph[from].push_back({ to, weight });
+        }
+    }
 
-			graph[from].push_back({ dist, to });
-		}
-	}
+    int node = dijkstra(1).first;
 
-	int num = dijkstra(1, dist, graph);
+    int ret = dijkstra(node).second;
 
-	cout << num << " : " << dist[num] << "\n";
+    cout << ret << "\n";
 
-	int ret = dijkstra(num, dist, graph);
-
-	cout << ret << " : " << dist[ret] << "\n";
-
-	return 0;
+    return 0;
 }
