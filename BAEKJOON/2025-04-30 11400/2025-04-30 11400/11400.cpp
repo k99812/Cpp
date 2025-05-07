@@ -5,7 +5,7 @@
 using namespace std;
 
 int v, e, cnt;
-vector<int> visited, parent;
+vector<int> visited, parent, inStack;
 vector<vector<int>> graph;
 vector<pair<int, int>> bridge;
 
@@ -13,12 +13,23 @@ int dfs(int start)
 {
 	visited[start] = ++cnt;
 	int ret = visited[start];
+	inStack[start] = true;
 
 	for (const int& next : graph[start])
 	{
 		if (parent[start] == next) continue;
 		if (visited[next])
 		{
+			if (inStack[next])
+			{
+				cout << "사이클 노드 : ";
+				for (int cur = start; cur != next; cur = parent[cur])
+				{
+					cout << cur << " ";
+				}
+				cout << next << "\n";
+			}
+
 			ret = min(ret, visited[next]);
 			continue;
 		}
@@ -32,6 +43,7 @@ int dfs(int start)
 			bridge.push_back({ min(start, next), max(start, next) });
 		}
 	}
+	inStack[start] = false;
 
 	return ret;
 }
@@ -40,7 +52,7 @@ int main()
 {
 	cin >> v >> e;
 
-	visited = parent = vector<int>(v + 1);
+	visited = parent = inStack = vector<int>(v + 1);
 	graph = vector<vector<int>>(v + 1);
 
 	for (int i = 0; i < e; i++)
