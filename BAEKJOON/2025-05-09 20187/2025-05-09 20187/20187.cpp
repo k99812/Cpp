@@ -16,7 +16,7 @@ int main()
 		cin >> dir;
 	}
 
-	cin >> h;
+	cin >> h;  
 
 	return 0;
 }
