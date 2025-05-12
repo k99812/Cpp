@@ -5,6 +5,7 @@
 using namespace std;
 
 int n, h;
+vector<char> command;
 
 int main()
 {
@@ -16,7 +17,7 @@ int main()
 		cin >> dir;
 	}
 
-	cin >> h;  
+	cin >> h;
 
 	return 0;
 }
