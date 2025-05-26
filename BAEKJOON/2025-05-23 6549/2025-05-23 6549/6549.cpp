@@ -25,12 +25,18 @@ int init(int node, int start, int end)
 
 int query(int node, int start, int end, int left, int right)
 {
-	if (right < start || end < left) return INT32_MAX;
+	if (right < start || end < left) return -1;
 
 	if (left <= start && end <= right) return segTree[node];
 
 	int mid = (start + end) / 2;
-	return min(query(2 * node, start, mid, left, right), query(2 * node + 1, mid + 1, end, left, right));
+	int leftIdx = query(2 * node, start, mid, left, right);
+	int rightIdx = query(2 * node + 1, mid + 1, end, left, right);
+
+	if (leftIdx == -1) return rightIdx;
+	if (rightIdx == -1) return leftIdx;
+
+	return v[leftIdx] <= v[rightIdx] ? leftIdx : rightIdx;
 }
 
 ll getArea(int start, int end)
@@ -38,7 +44,7 @@ ll getArea(int start, int end)
 	if (end < start) return 0;
 
 	int minIdx = query(1, 1, n, start, end);
-	ll area = v[minIdx] * (end - start);
+	ll area = v[minIdx] * (end - start + 1);
 
 	ll leftArea = getArea(start, minIdx - 1);
 	ll rightArea = getArea(minIdx + 1, end);
