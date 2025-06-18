@@ -66,15 +66,15 @@ pair<int, int> LCA(int a, int b)
 	{
 		if (parent[a][j] && parent[a][j] != parent[b][j])
 		{
-			minNum = min(min(minNum, mnEdge[a][j]), mnEdge[b][j]);
-			maxNum = max(max(maxNum, mxEdge[a][j]), mxEdge[b][j]);
+			minNum = min({ minNum, mnEdge[a][j], mnEdge[b][j] });
+			maxNum = max({ maxNum, mxEdge[a][j], mxEdge[b][j] });
 			a = parent[a][j];
 			b = parent[b][j];
 		}
 	}
 
-	minNum = min(min(minNum, mnEdge[a][0]), mnEdge[b][0]);
-	maxNum = max(max(maxNum, mxEdge[a][0]), mxEdge[b][0]);
+	minNum = min({ minNum, mnEdge[a][0], mnEdge[b][0] });
+	maxNum = max({ maxNum, mxEdge[a][0], mxEdge[b][0] });
 
 	return { minNum, maxNum };
 }
