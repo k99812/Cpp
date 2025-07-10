@@ -46,25 +46,27 @@ int sand(int y, int x, int dir)
 
 		remaining_sand -= spread_amount;
 
-		int ny = y + spread[dir][i].first;
-		int nx = x + spread[dir][i].second;
+		int ny = y + spread[dir][i].first, nx = x + spread[dir][i].second;
 
-		if (ny < 0 || nx < 0 || ny >= n || nx >= n) {
+		if (ny < 0 || nx < 0 || ny >= n || nx >= n) 
+		{
 			out_sand += spread_amount;
 		}
-		else {
+		else 
+		{
 			board[ny][nx] += spread_amount;
 		}
 	}
 
-	int ay = y + dy[dir];
-	int ax = x + dx[dir];
+	int ny = y + dy[dir], nx = x + dx[dir];
 
-	if (ay < 0 || ax < 0 || ay >= n || ax >= n) {
+	if (ny < 0 || nx < 0 || ny >= n || nx >= n)
+	{
 		out_sand += remaining_sand;
 	}
-	else {
-		board[ay][ax] += remaining_sand;
+	else 
+	{
+		board[ny][nx] += remaining_sand;
 	}
 
 	board[y][x] = 0;
