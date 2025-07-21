@@ -6,11 +6,13 @@ using namespace std;
 
 int n, m;
 vector<vector<int>> board;
+pair<int, int> shark;
 
 int main()
 {
 	cin >> n >> m;
 
+	shark = { (n + 1) / 2, (n + 1) / 2 };
 	board = vector<vector<int>>(n, vector<int>(n));
 
 	for (int i = 0; i < n; i++)
@@ -26,6 +28,6 @@ int main()
 		int d, s;
 		cin >> d >> s;
 	}
-
+	
 	return 0;
 }
