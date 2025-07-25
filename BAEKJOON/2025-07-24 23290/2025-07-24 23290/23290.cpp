@@ -1,7 +1,6 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
-#include <functional>
 
 using namespace std;
 
@@ -16,16 +15,6 @@ int m, s;
 vector<vector<int>> board;
 vector<Info> fish;
 pair<int, int> shark;
-
-class MyClass
-{
-
-};
-
-void go(unique_ptr<MyClass, function<void(MyClass*)>>& test)
-{
-
-}
 
 int main()
 {
@@ -42,12 +31,6 @@ int main()
 
 	cin >> shark.second >> shark.first;
 	shark.first--, shark.second--;
-
-	MyClass* myClass = new MyClass();
-	unique_ptr<MyClass> ptr2(myClass);
-	unique_ptr<MyClass, function<void(MyClass*)>> ptr(new MyClass(), [](MyClass* p) { delete p; });
-
-	go(ptr);
 
 	return 0;
 }
