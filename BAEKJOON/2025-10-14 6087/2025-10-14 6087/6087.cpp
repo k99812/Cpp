@@ -2,17 +2,59 @@
 #include<algorithm>
 #include<vector>
 #include<string>
+#include<queue>
 
 using namespace std;
 
+const int INF = INT32_MAX;
+const int dy[] = { -1, 0, 1, 0 };
+const int dx[] = { 0, 1, 0, -1 };
+
 int n, m;
-vector<vector<int>> board;
+vector<vector<int>> board, dist;
 pair<int, int> start, end_;
+
+void bfs()
+{
+	queue<pair<int, int>> q;
+
+	q.push(start);
+	dist[start.first][start.second] = 0;
+
+	while (q.size())
+	{
+		int y = q.front().first, x = q.front().second;
+		q.pop();
+
+		for (int i = 0; i < 4; i++)
+		{
+			int ny = y + dy[i], nx = x + dx[i];
+
+			while (true)
+			{
+				if (ny < 0 || nx < 0 || ny >= n || nx >= m) break;
+				if (board[ny][nx] == 1) break;
+
+				if (dist[ny][nx] == INF)
+				{
+					dist[ny][nx] = dist[y][x] + 1;
+					q.push({ ny, nx });
+				}
+
+				ny = ny + dy[i];
+				nx = nx + dx[i];
+			}
+		}
+	}
+}
 
 int main()
 {
 	cin >> m >> n;
+
 	start = { -1, -1 };
+	board = vector<vector<int>>(n, vector<int>(m));
+	dist = vector<vector<int>>(n, vector<int>(m, INF));
 
 	for (int i = 0; i < n; i++)
 	{
@@ -30,6 +72,10 @@ int main()
 			}
 		}
 	}
+
+	bfs();
+
+	cout << dist[end_.first][end_.second] - 1 << "\n";
 
 	return 0;
 }
