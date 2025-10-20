@@ -11,7 +11,7 @@ struct Cordi
 	bool operator<(const Cordi& other) const
 	{
 		if (x != other.x) return x < other.x;
-		return y < other.y;
+		return y > other.y;
 	}
 };
 
@@ -28,6 +28,10 @@ int main()
 	{
 		cin >> arr[i].x >> arr[i].y;
 	}
+
+	sort(arr.begin(), arr.end());
+
+
 
 	return 0;
 }
