@@ -8,7 +8,12 @@ using namespace std;
 
 struct Info
 {
-	int y, x, d;
+	int y, x, dir, cnt;
+
+	bool operator>(const Info& other) const
+	{
+		return cnt > other.cnt;
+	}
 };
 
 const int INF = 1e9;
@@ -19,59 +24,52 @@ int n;
 vector<string> board;
 vector<pair<int, int>> doors, mirrors;
 
-int bfs()
+int dijkstra()
 {
-	int mirror_size = mirrors.size();
-	vector<vector<vector<int>>> dist(n, vector<vector<int>>(n, vector<int>(mirror_size, INF)));
-	queue<Info> q;
+	vector<vector<vector<int>>> dist(n, vector<vector<int>>(n, vector<int>(4, INF)));
+	priority_queue<Info, vector<Info>, greater<Info>> pq;
 	
 	for (int i = 0; i < 4; i++)
 	{
-		q.push({ doors[0].first, doors[0].second, i });
+		pq.push({ doors[0].first, doors[0].second, i, 0 });
 		dist[doors[0].first][doors[0].second][i] = 0;
 	}
 
-	int ret = INF;
-	while (q.size())
+	while (pq.size())
 	{
-		int y = q.front().y, x = q.front().x, d = q.front().d;
-		q.pop();
+		int y = pq.top().y, x = pq.top().x, d = pq.top().dir, cnt = pq.top().cnt;
+		pq.pop();
 
-		while (true)
+		if (y == doors[1].first && x == doors[1].second)
 		{
-			int ny = y + dy[d], nx = x + dx[d], nd = d;
+			return cnt;
+		}
 
-			if (ny < 0 || nx < 0 || ny >= n || nx >= n) break;
-			if (board[ny][nx] == '*' || dist[ny][nx][nd] != INF) break;
-			if (board[ny][nx] == '!' || board[ny][nx] == '#')
-			{
-				dist[ny][nx][nd] = dist[y][x][d];
-				y = ny, x = nx;
-				break;
-			}
+		int ny = y + dy[d], nx = x + dx[d], nd = d;
 
+		if (ny < 0 || nx < 0 || ny >= n || nx >= n || board[ny][nx] == '*') continue;
+		
+		if (dist[ny][nx][nd] > dist[y][x][d])
+		{
 			dist[ny][nx][nd] = dist[y][x][d];
-			y = ny, x = nx;
+			pq.push({ ny, nx, nd, cnt });
 		}
 
-		if (board[y][x] == '#')
+		if (board[ny][nx] == '!')
 		{
-			ret = min(ret, dist[y][x][d]);
-			continue;
-		}
-		else if (board[y][x] == '!')
-		{
-			int nd = (d + 1 + 4) % 4;
-			dist[y][x][nd] = dist[y][x][d] + 1;
-			q.push({ y, x, nd });
-
-			nd = (d + 1 + 4) % 4;
-			dist[y][x][nd] = dist[y][x][d] + 1;
-			q.push({ y, x, nd });
+			for (int i = 1; i <= 3; i += 2)
+			{
+				nd = (d + i) % 4;
+				if (dist[ny][nx][nd] > cnt)
+				{
+					dist[ny][nx][nd] = cnt + 1;
+					pq.push({ ny, nx, nd, cnt + 1 });
+				}
+			}
 		}
 	}
 
-	return ret;
+	return 0;
 }
 
 int main()
@@ -96,6 +94,7 @@ int main()
 		}
 	}
 
+	cout << dijkstra() << "\n";
 
 	return 0;
 }
