@@ -14,35 +14,36 @@ public:
         vector<int> ret;
         if (s.empty() || words.empty()) return ret;
 
-        int size = words.size(), word_len = words[0].size();
+        int str_length = words[0].length(), words_size = words.size();
 
-        unordered_map<string, int> word_cnt;
-        for (const string& str : words) word_cnt[str]++;
+        unordered_map<string, int> words_cnt;
+        for (const string& str : words) words_cnt[str]++;
 
-        for (int i = 0; i < word_len; i++)
+        for (int i = 0; i < str_length; i++)
         {
             int left = i, right = i, cnt = 0;
+
             unordered_map<string, int> un_map;
 
-            while (right + word_len <= s.size())
+            while (right + str_length <= s.length())
             {
-                string now = s.substr(right, word_len);
-                right += word_len;
+                string now = s.substr(right, str_length);
+                right += str_length;
 
-                if (word_cnt.count(now))
+                if (words_cnt.count(now))
                 {
-                    un_map[now]++;
                     cnt++;
+                    un_map[now]++;
 
-                    while (un_map[now] > word_cnt[now])
+                    while (un_map[now] > words_cnt[now])
                     {
-                        string left_word = s.substr(left, word_len);
-                        un_map[left_word]--;
+                        string left_word = s.substr(left, str_length);
                         cnt--;
-                        left += word_len;
+                        un_map[left_word]--;
+                        left += str_length;
                     }
 
-                    if (cnt == size) ret.push_back(left);
+                    if (cnt == words_size) ret.push_back(left);
                 }
                 else
                 {
