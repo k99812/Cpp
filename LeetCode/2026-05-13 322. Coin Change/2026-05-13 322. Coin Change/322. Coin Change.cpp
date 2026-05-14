@@ -6,10 +6,35 @@ using namespace std;
 
 class Solution 
 {
+private:
     const int INF = 1e9;
 
     int target;
-    vector<int> coins;
+    vector<int> coins, dp;
+
+    int dfs(int remain)
+    {
+        if (remain < 0) return INF;
+
+        if (remain == 0) return 0;
+
+        int& ret = dp[remain];
+        if (ret != -1) return ret;
+
+        ret = INF;
+
+        for (const int coin : coins)
+        {
+            int temp = dfs(remain - coin);
+
+            if (temp != INF)
+            {
+                ret = min(ret, temp + 1);
+            }
+        }
+
+        return ret;
+    }
 
 public:
     Solution() : target(0)
@@ -22,7 +47,12 @@ public:
         coins = input;
         target = amount;
 
-        vector<int> dp(amount + 1, INF);
+        dp.assign(amount + 1, -1);
+
+        int ret = dfs(amount);
+        return ret == INF ? -1 : ret;
+
+        /*dp.assign(amount + 1, INF);
         dp[0] = 0;
 
         for (int i = 0; i < input.size(); i++)
@@ -35,7 +65,7 @@ public:
             }
         }
 
-        return dp[amount] == INF ? -1 : dp[amount];
+        return dp[amount] == INF ? -1 : dp[amount];*/
     }
 };
 
