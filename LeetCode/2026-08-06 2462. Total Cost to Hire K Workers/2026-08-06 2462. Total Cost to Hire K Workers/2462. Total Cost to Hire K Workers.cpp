@@ -26,20 +26,42 @@ public:
         priority_queue<point> left_pq, right_pq;
 
         int left = 0, right = costs.size() - 1;
-        for (left; left < candidates && left < right; left++)
+        for (; left < candidates && left <= right; left++)
         {
             left_pq.push({ costs[left], left });
         }
 
-        for (int i = 0; i < candidates && left < right; i++)
+        for (int i = 0; i < candidates && left <= right; i++)
         {
             right_pq.push({ costs[right], right-- });
         }
 
+        ll ret = 0;
         for (int step = 0; step < k; step++)
         {
-            if(left_pq.size())
+            if (right_pq.empty() || (left_pq.size() && right_pq.top() < left_pq.top()))
+            {
+                ret += left_pq.top().cost;
+                left_pq.pop();
+
+                if (left <= right)
+                {
+                    left_pq.push({ costs[left], left++ });
+                }
+            }
+            else
+            {
+                ret += right_pq.top().cost;
+                right_pq.pop();
+
+                if (left <= right)
+                {
+                    right_pq.push({ costs[right], right-- });
+                }
+            }
         }
+
+        return ret;
     }
 };
 
