@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-08-27 322. Coin Change/2026-08-27 322. Coin Change.vcxproj" />
+</Solution>
