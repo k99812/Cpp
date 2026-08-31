@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-08-31 1291. Sequential Digits/2026-08-31 1291. Sequential Digits.vcxproj" />
+</Solution>
