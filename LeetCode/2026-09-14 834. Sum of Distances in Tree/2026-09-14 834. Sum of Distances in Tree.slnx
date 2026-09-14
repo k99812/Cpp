@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-09-14 834. Sum of Distances in Tree/2026-09-14 834. Sum of Distances in Tree.vcxproj" />
+</Solution>
