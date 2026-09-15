@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-09-15 621. Task Scheduler/2026-09-15 621. Task Scheduler.vcxproj" />
+</Solution>
