@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-09-16 435. Non-overlapping Intervals/2026-09-16 435. Non-overlapping Intervals.vcxproj" />
+</Solution>
