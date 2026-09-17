@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-09-17 1129. Shortest Path with Alternating Colors/2026-09-17 1129. Shortest Path with Alternating Colors.vcxproj" />
+</Solution>
