@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-06 802. Find Eventual Safe States/2026-10-06 802. Find Eventual Safe States.vcxproj" />
+</Solution>
