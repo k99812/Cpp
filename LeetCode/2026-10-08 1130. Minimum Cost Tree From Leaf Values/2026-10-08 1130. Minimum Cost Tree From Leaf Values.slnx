@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-08 1130. Minimum Cost Tree From Leaf Values/2026-10-08 1130. Minimum Cost Tree From Leaf Values.vcxproj" />
+</Solution>
