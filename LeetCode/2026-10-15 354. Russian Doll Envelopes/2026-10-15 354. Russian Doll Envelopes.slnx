@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-15 354. Russian Doll Envelopes/2026-10-15 354. Russian Doll Envelopes.vcxproj" />
+</Solution>
