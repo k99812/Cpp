@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-26 862. Shortest Subarray with Sum at Least K/2026-10-26 862. Shortest Subarray with Sum at Least K.vcxproj" />
+</Solution>
