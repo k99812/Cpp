@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-27 1786. Number of Restricted Paths From First to Last Node/2026-10-27 1786. Number of Restricted Paths From First to Last Node.vcxproj" />
+</Solution>
