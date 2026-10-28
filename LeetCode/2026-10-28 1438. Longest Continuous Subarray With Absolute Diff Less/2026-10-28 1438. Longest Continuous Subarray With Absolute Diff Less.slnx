@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-28 1438. Longest Continuous Subarray With Absolute Diff Less/2026-10-28 1438. Longest Continuous Subarray With Absolute Diff Less.vcxproj" />
+</Solution>
