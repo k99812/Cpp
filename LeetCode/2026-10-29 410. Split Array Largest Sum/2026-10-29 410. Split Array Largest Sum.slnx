@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-29 410. Split Array Largest Sum/2026-10-29 410. Split Array Largest Sum.vcxproj" />
+</Solution>

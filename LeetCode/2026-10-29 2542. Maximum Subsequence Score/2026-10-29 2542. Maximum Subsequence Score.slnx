@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-29 2542. Maximum Subsequence Score/2026-10-29 2542. Maximum Subsequence Score.vcxproj" />
+</Solution>
