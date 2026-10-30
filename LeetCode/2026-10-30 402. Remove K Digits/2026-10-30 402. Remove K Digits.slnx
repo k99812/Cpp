@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-10-30 402. Remove K Digits/2026-10-30 402. Remove K Digits.vcxproj" />
+</Solution>
