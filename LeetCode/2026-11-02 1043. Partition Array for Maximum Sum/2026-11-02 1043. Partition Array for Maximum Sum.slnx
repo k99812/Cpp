@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-11-02 1043. Partition Array for Maximum Sum/2026-11-02 1043. Partition Array for Maximum Sum.vcxproj" />
+</Solution>

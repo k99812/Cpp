@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-11-02 2401. Longest Nice Subarray/2026-11-02 2401. Longest Nice Subarray.vcxproj" />
+</Solution>
