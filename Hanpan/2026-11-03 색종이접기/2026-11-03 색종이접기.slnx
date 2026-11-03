@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-11-03 색종이접기/2026-11-03 색종이접기.vcxproj" />
+</Solution>
