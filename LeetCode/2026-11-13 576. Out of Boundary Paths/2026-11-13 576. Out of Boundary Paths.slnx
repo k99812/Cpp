@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-11-13 576. Out of Boundary Paths/2026-11-13 576. Out of Boundary Paths.vcxproj" />
+</Solution>
