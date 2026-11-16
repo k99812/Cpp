@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-11-16 1575. Count All Possible Routes/2026-11-16 1575. Count All Possible Routes.vcxproj" />
+</Solution>
