@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="2026-11-18 1405. Longest Happy String/2026-11-18 1405. Longest Happy String.vcxproj" />
+</Solution>
